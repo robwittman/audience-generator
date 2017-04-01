@@ -1,0 +1,30 @@
+{
+    "name": "rwitman/audience-generator",
+    "description": "Bulk FB Custom Audience generator",
+    "authors": [
+        {
+            "name": "Rob Wittman",
+            "email": "rob@ihsdigital.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.8",
+        "robmorgan/phinx": "^0.8.0",
+        "ext-curl": "^7.0",
+        "ext-pdo": "^7.0",
+        "robby-bugatti/shopify-php-sdk": "^1.0",
+        "slim/twig-view": "^2.2",
+        "slim/flash": "^0.2.0",
+        "illuminate/database": "^5.4",
+        "plasticbrain/php-flash-messages": "^1.0",
+        "nesbot/carbon": "^1.22",
+        "facebook/php-ads-sdk": "^2.8",
+        "facebook/graph-sdk": "^5.4",
+        "php-amqplib/php-amqplib": "^2.6"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "App\\": "src"
+        }
+    }
+}

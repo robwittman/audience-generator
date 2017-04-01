@@ -1,0 +1,43 @@
+version: "2"
+services:
+    web:
+        build: .
+        ports:
+            - 80:80
+        links:
+            - postgres
+            - cloudamqp
+        volumes:
+            - ./:/var/www/
+            - ./html/.user.ini:/usr/local/etc/php/php.ini
+            - ./logs/output.log:/output.log
+        env_file: .env
+    postgres:
+        image: postgres
+        volumes:
+            - ./data/postgres:/var/lib/postgres
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: password
+            POSTGRES_USER: postgres
+            POSTGRES_DB: shopify
+    cloudamqp:
+        image: rabbitmq:3-management
+        ports:
+            - "15672:15672"
+        environment:
+            RABBITMQ_DEFAULT_USER: rabbitmq
+            RABBITMQ_DEFAULT_PASS: password
+            RABBITMQ_DEFAULT_VHOST: default
+    # account_sync:
+    #     image: php:7-cli
+    #     links:
+    #         - cloudamqp
+    #     depends_on:
+    #         - cloudamqp
+    #     volumes:
+    #         - ./:/opt
+    #     command: php /opt/bin/account_sync.php
+    #     environment:
+    #         CLOUDAMQP_URL: amqp://rabbitmq:password@cloudamqp/default
